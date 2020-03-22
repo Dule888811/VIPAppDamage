@@ -46,7 +46,7 @@ class LoginController extends Controller
             $this->redirectTo = route('admin.main');
             return $this->redirectTo;
         }else{
-            return $this->redirectTo  = route('officer.damages.index');
+            return $this->redirectTo  = route('officer.main');
         }
     }
 }

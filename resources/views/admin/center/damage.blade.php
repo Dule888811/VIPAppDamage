@@ -20,15 +20,14 @@
         @endforeach
     @endif
     <div class="list">
+
         @foreach($damages as $damage)
             <div  class="flex-container">
                 <ul class="ul-products">
-                    <li class="li-products">Damage type of priority: {{$damage->type_of_priority}}</li>
                     <li class="li-products">Damage status: {{$damage->status}}</li>
-                    <li class="li-products">Damage status: {{$damage->center_id}}</li>
-                    <li class="li-products">Damage description: {{$damage->description}}</li>
-                        <li class="li-products">Damage date: {{$damage->date}}</li>
-                    <li class="li-products"><a class="btn btn-primary"  href ="{{route('officer.damages.edit',$damage->id)}}">Edit</a></li>
+                    <li class="li-products">Damage description: {{$damage->type_of_priority	}}</li>
+                    <li class="li-products"><a class="btn btn-primary"  href ="{{route('admin.status.edit',$damage->id)}}">EditStatus</a></li>
+                    <li class="li-products"><a class="btn btn-primary"  href ="{{route('admin.damages.removeDamage',$damage->id)}}">Delete</a></li>
                 </ul>
             </div>
             <hr class="hrli">
@@ -36,5 +35,9 @@
 
     </div>
     <hr>
-    <a href ="{{route('officer.main')}}">Back to maintaining</a>
+    <a href ="{{route('admin.main')}}">Back to maintaining</a>
 @endsection
+
+
+
+

@@ -41,5 +41,5 @@
         @endif
         <input type="submit" value="Edit">
     </form>
-    <a href ="{{route('admin.main')}}">Back to maintaining</a>
+    <a href ="{{route('officer.main')}}">Back to maintaining</a>
 @endsection

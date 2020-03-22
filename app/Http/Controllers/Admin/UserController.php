@@ -3,30 +3,26 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Center;
+use App\Damage;
 use App\Http\Controllers\Controller;
 
 use App\Mail\ProvidePassword;
+use App\Repositories\UserRepositories;
+use App\Repositories\UserRepositoriesInterface;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    private $userRepositories;
+    public function __construct(UserRepositoriesInterface $userRepositories)
     {
-        //
+        $this->userRepositories = $userRepositories;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('admin.user.create');
@@ -40,59 +36,43 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new User();
-        $user->name = $request->user_name;
-        $user->role = $request->role;
-        $user->email = $request->user_email;
-        $user->save();
+       $user = $this->userRepositories->store($request);
         Mail::to($user)->send(new ProvidePassword($user));
         return redirect()->route('admin.main');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
+    public function showDanger(User $user)
     {
-        //
+        return view('emails.password')->with(['user' => $user]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
+    public function delete(Damage $damage)
     {
-        //
+
+        $damage->delete();
+        return redirect()->route('admin.main');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, User $user)
+    public function changeStatus(Damage $damage)
     {
-        //
+        return view('admin.center.status')->with(['damage' => $damage]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(User $user)
+    public function soreStatus(Request $request,Damage $damage)
     {
-        //
+        $damage->status = $request->not_resolved;
+        $damage->update();
+        return redirect()->route('admin.main');
     }
+
+    public function deleteDamage(Damage $damage)
+    {
+        return view('admin.center.deleteDamage')->with(['damage' => $damage]);
+    }
+
+
+
+
 
 
 }

@@ -13,10 +13,10 @@ class AddCenterIdToDamagesTable extends Migration
      */
     public function up()
     {
+        Schema::enableForeignKeyConstraints();
         Schema::table('damages', function (Blueprint $table) {
-            $table->unsignedBigInteger('center_id')->index()->nullable();
-            $table->foreign('center_id')->references('id')
-                ->on('damages')
+            $table->foreignId('center_id')
+                ->constrained()
                 ->onDelete('cascade');
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';

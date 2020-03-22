@@ -20,6 +20,11 @@ class EmailController
         $user->remember_token = Str::random(10);
         $user->password = Hash::make($request->doctor_password);
         $user->save();
-       // return redirect()->route('notification.index');
+         return view('welcome');
     }
+    public function warning()
+    {
+        return view('emails.warning');
+    }
+
 }

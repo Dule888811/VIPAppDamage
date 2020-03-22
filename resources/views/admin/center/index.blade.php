@@ -31,8 +31,10 @@
                     @if(isset($center->opening_date))
                         <li class="li-products">Center address: {{$center->opening_date}}</li>
                     @endif
+                    <li class="li-products"><a class="btn btn-primary"  href ="{{route('admin.centers.damage',$center->id)}}">See damage</a></li>
                     <li class="li-products"><a class="btn btn-primary"  href ="{{route('admin.centers.edit',$center->id)}}">Edit</a></li>
                     <li class="li-products"><a class="btn btn-primary"  href ="{{route('admin.centers.delete',$center->id)}}">Delete</a></li>
+
                 </ul>
             </div>
             <hr class="hrli">
@@ -40,5 +42,5 @@
 
     </div>
     <hr>
-
+    <a href ="{{route('admin.main')}}">Back to maintaining</a>
 @endsection

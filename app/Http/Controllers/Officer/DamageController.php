@@ -5,8 +5,16 @@ namespace App\Http\Controllers\Officer;
 
 use App\Http\Controllers\Controller;
 use App\Damage;
+use App\Mail\ProvidePassword;
+use App\Mail\WarningMail;
+use App\Repositories\DamageRepositories;
+use App\Repositories\DamageRepositoriesInterface;
+use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-
+use App\Center;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 class DamageController extends Controller
 {
     /**
@@ -14,9 +22,16 @@ class DamageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private $damageRepositories;
+
+    public function __construct(DamageRepositoriesInterface $damageRepositories)
+    {
+        $this->damageRepositories = $damageRepositories;
+    }
+
     public function index()
     {
-        $damages = Damage::all();
+        $damages = $this->damageRepositories->all();
         return view('officer.index')->with('damages',$damages);
     }
 
@@ -27,7 +42,9 @@ class DamageController extends Controller
      */
     public function create()
     {
-        //
+        $centers = Center::all();
+        return view('officer.create')->with('centers',$centers);
+
     }
 
     /**
@@ -38,8 +55,34 @@ class DamageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'damage_date' =>'date|required',
+            'center_damage' => 'required',
+            'type_priority' => 'required',
+            'status' => 'required',
+            'damage_description' => 'required',
+        ]);
+
+        $damage = $this->damageRepositories->store($request);
+        $id = $damage->id;
+        if($damage->type_of_priority == 'critical'){
+            $user = User::where('role','admin')->first()->get();
+            Mail::to($user)->send(new WarningMail($user));
+        }
+            $time = Carbon::now();
+            $damageCritical = Damage::find($id);
+            if($damageCritical->type_of_priority == 'critical' && $time == $time->addDays(1)){
+                    $user = User::where('role','admin')->first()->get();
+                    Mail::to($user)->send(new WarningMail($user));
+            }
+
+
+
+
+        return redirect()->back();
     }
+
+
 
     /**
      * Display the specified resource.
@@ -47,10 +90,7 @@ class DamageController extends Controller
      * @param  \App\Damage  $damage
      * @return \Illuminate\Http\Response
      */
-    public function show(Damage $damage)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -60,29 +100,23 @@ class DamageController extends Controller
      */
     public function edit(Damage $damage)
     {
-        //
+        $centers = Center::all();
+        return view('officer.edit')->with(['damage' => $damage,'centers' => $centers ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Damage  $damage
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, Damage $damage)
     {
-        //
+        $request->validate([
+            'damage_date' =>'date|required',
+            'center_damage' => 'required',
+            'type_priority' => 'required',
+            'damage_description' => 'required',
+        ]);
+        $this->damageRepositories->update($request,$damage);
+        return redirect()->route('officer.damages.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Damage  $damage
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Damage $damage)
-    {
-        //
-    }
+
+   
 }

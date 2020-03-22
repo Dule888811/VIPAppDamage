@@ -11,6 +11,6 @@ class Center extends Model
     ];
     public function Damage()
     {
-        return $this->belongsTo('App\Damage');
+        return $this->belongsTo('App\Center');
     }
 }
