@@ -70,16 +70,21 @@ class DamageController extends Controller
             Mail::to($user)->send(new WarningMail($user));
         }
             $time = Carbon::now();
+            $timeFuture = new Carbon();
             $damageCritical = Damage::find($id);
-            if($damageCritical->type_of_priority == 'critical' && $time == $time->addDays(1)){
-                    $user = User::where('role','admin')->first()->get();
-                    Mail::to($user)->send(new WarningMail($user));
-            }
-
-
-
+            while($damageCritical->type_of_priority == 'critical' && $timeFuture == $time->addDays(1 ))
+                {
+                    $time = $time->addDays(1 );
+                    self::sendMail();
+                }
 
         return redirect()->back();
+    }
+
+    public static function sendMail()
+    {
+        $user = User::where('role','admin')->first()->get();
+        Mail::to($user)->send(new WarningMail($user));
     }
 
 
