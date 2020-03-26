@@ -86,7 +86,7 @@ class DamageController extends Controller
               {
                   $time = Carbon::now();
                   $timeFuture = $time->addDays(1);
-                  if($timeFuture == $time){
+                  if($timeFuture == Carbon::now()){
                       $time = $time->addDays(1);
                       $user = User::where('role', 'admin')->first()->get();
                       Mail::to($user)->send(new WarningMail($user));
