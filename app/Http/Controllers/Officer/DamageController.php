@@ -65,28 +65,31 @@ class DamageController extends Controller
 
         $damage = $this->damageRepositories->store($request);
         $id = $damage->id;
+        $damageArray[] = array();
         if($damage->type_of_priority == 'critical'){
             $user = User::where('role','admin')->first()->get();
             Mail::to($user)->send(new WarningMail($user));
         }
 
-            $damageCritical = Damage::find($id);
-
-        self::sendMail($damageCritical);
+        $damageCritical = Damage::find($id);
+        $damageArray[] = $damageCritical;
+        self::sendMail($damageArray);
 
 
         return redirect()->back();
     }
 
-    public static function sendMail($damageCritical)
+    public static function sendMail($damageArray)
     {
         $time = Carbon::now();
-        $timeFuture = new Carbon();
-        while($damageCritical->type_of_priority == 'critical' && $timeFuture == $time->addDays(1 )){
-            $time = $time->addDays(1 );
-            $user = User::where('role','admin')->first()->get();
-            Mail::to($user)->send(new WarningMail($user));
-        }
+        $timeFuture = $time->addDays(1);
+      for ($i=0;$i++;$i<count($damageArray)) {
+          while ($damageArray[$i] == 'critical' && $timeFuture == $time) {
+              $time = $time->addDays(1);
+              $user = User::where('role', 'admin')->first()->get();
+              Mail::to($user)->send(new WarningMail($user));
+          }
+      }
 
     }
 
