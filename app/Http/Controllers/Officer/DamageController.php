@@ -84,9 +84,9 @@ class DamageController extends Controller
       for ($i=0;$i++;$i<count($damageArray))
       {
           $time = Carbon::now();
+          $timeFuture = $time->addDays(1);
           while ($damageArray[$i] == 'critical')
               {
-                  $timeFuture = $time->addDays(1);
                   if($timeFuture == Carbon::now()){
                       $time = $time->addDays(1);
                       $user = User::where('role', 'admin')->first()->get();
