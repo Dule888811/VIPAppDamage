@@ -81,9 +81,10 @@ class DamageController extends Controller
 
     public static function sendMail($damageArray)
     {
-        $time = Carbon::now();
-        $timeFuture = $time->addDays(1);
-      for ($i=0;$i++;$i<count($damageArray)) {
+      for ($i=0;$i++;$i<count($damageArray))
+      {
+          $time = Carbon::now();
+          $timeFuture = $time->addDays(1);
           while ($damageArray[$i] == 'critical' && $timeFuture == $time) {
               $time = $time->addDays(1);
               $user = User::where('role', 'admin')->first()->get();

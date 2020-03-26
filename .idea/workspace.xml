@@ -24,8 +24,6 @@
       <change afterPath="$PROJECT_DIR$/../../LaraveLHospitals/LaraveLHospitals/database/migrations/2020_01_31_012234_create_hospitals_table.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../LaraveLHospitals/LaraveLHospitals/database/migrations/2020_01_31_014808_add_target_specialties_to_notifications.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../LaraveLHospitals/LaraveLHospitals/database/migrations/2020_01_31_020256_add_surname_to_users.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/emails/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/emails/password.blade.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../packages/Packages/.idea/Packages.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../packages/Packages/.idea/misc.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../packages/Packages/.idea/modules.xml" afterDir="false" />
@@ -49,7 +47,6 @@
       <change beforePath="$PROJECT_DIR$/../../LaravelApiTest" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../LaravelModules" beforeDir="false" afterPath="$PROJECT_DIR$/../../LaravelModules" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../MVC" beforeDir="false" afterPath="$PROJECT_DIR$/../../MVC" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Officer/DamageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Officer/DamageController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../laravelApiPhpTest/.editorconfig" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../laravelApiPhpTest/.env.example" beforeDir="false" />
@@ -171,7 +168,7 @@
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Officer/DamageController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="292">
-              <caret line="87" column="66" selection-start-line="87" selection-start-column="66" selection-end-line="87" selection-end-column="66" />
+              <caret line="84" column="79" selection-start-line="84" selection-start-column="79" selection-end-line="84" selection-end-column="79" />
               <folding>
                 <element signature="e#49#85#0#PHP" expanded="true" />
               </folding>
@@ -597,12 +594,12 @@
       <workItem from="1584779881024" duration="60944000" />
       <workItem from="1584845538798" duration="2808000" />
       <workItem from="1584899176929" duration="20839000" />
-      <workItem from="1585234492103" duration="1560000" />
+      <workItem from="1585234492103" duration="2363000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="173052000" />
+    <option name="totallyTimeSpent" value="173855000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1040" height="744" extended-state="6" />
@@ -1001,7 +998,7 @@
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Officer/DamageController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="292">
-          <caret line="87" column="66" selection-start-line="87" selection-start-column="66" selection-end-line="87" selection-end-column="66" />
+          <caret line="84" column="79" selection-start-line="84" selection-start-column="79" selection-end-line="84" selection-end-column="79" />
           <folding>
             <element signature="e#49#85#0#PHP" expanded="true" />
           </folding>
