@@ -85,7 +85,7 @@ class DamageController extends Controller
       {
           $time = Carbon::now();
           $timeFuture = $time->addDays(1);
-          while ($damageArray[$i] == 'critical')
+          while ($damageArray[$i]->type_of_priority == 'critical')
               {
                   if($timeFuture == Carbon::now()){
                       $time = $time->addDays(1);
