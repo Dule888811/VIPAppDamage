@@ -71,7 +71,7 @@ class DamageController extends Controller
             $user = User::where('role','admin')->first()->get();
             Mail::to($user)->send(new WarningMail($user));
         }
-        
+
         self::sendMail($damageArray);
 
 
@@ -82,13 +82,17 @@ class DamageController extends Controller
     {
       for ($i=0;$i++;$i<count($damageArray))
       {
-          $time = Carbon::now();
-          $timeFuture = $time->addDays(1);
-          while ($damageArray[$i] == 'critical' && $timeFuture == $time) {
-              $time = $time->addDays(1);
-              $user = User::where('role', 'admin')->first()->get();
-              Mail::to($user)->send(new WarningMail($user));
-          }
+          while ($damageArray[$i] == 'critical')
+              {
+                  $time = Carbon::now();
+                  $timeFuture = $time->addDays(1);
+                  if($timeFuture == $time){
+                      $time = $time->addDays(1);
+                      $user = User::where('role', 'admin')->first()->get();
+                      Mail::to($user)->send(new WarningMail($user));
+                  }
+
+              }
       }
 
     }
