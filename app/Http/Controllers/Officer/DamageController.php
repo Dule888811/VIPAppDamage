@@ -67,12 +67,11 @@ class DamageController extends Controller
         $id = $damage->id;
         $damageArray[] = array();
         if($damage->type_of_priority == 'critical'){
+            $damageArray[] = $damage;
             $user = User::where('role','admin')->first()->get();
             Mail::to($user)->send(new WarningMail($user));
         }
-
-        $damageCritical = Damage::find($id);
-        $damageArray[] = $damageCritical;
+        
         self::sendMail($damageArray);
 
 
